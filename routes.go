@@ -23,5 +23,6 @@ func setRoutes(r *httprouter.Router) {
 
 	r.GET("/ticket", wrapper(http.HandlerFunc(listHandler)))
 	r.POST("/ticket", wrapper(http.HandlerFunc(addHandler)))
+	r.GET("/ticket/:id", wrapper(http.HandlerFunc(getHandler)))
 
 }
