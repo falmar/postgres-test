@@ -7,26 +7,14 @@ package main
 import (
 	"encoding/json"
 	"net/http"
-	"strconv"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 func getHandler(w http.ResponseWriter, r *http.Request) {
-	var ps httprouter.Params
-	var ticketID int64
 	tck := &ticket{}
 
-	ps, ok := r.Context().Value("params").(httprouter.Params)
+	ticketID, err := ticketIDFromCtx(r.Context())
 
-	if !ok {
-		w.Write([]byte("No identifier specified\n"))
-		return
-	}
-
-	ticketID, _ = strconv.ParseInt(ps.ByName("id"), 10, 64)
-
-	if ticketID == 0 {
+	if ticketID == 0 || err != nil {
 		w.Write([]byte("No identifier specified\n"))
 		return
 	}
