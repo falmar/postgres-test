@@ -15,7 +15,7 @@ func getHandler(w http.ResponseWriter, r *http.Request) {
 	ticketID, err := ticketIDFromCtx(r.Context())
 
 	if ticketID == 0 || err != nil {
-		w.Write([]byte("No identifier specified\n"))
+		http.Error(w, "No identifier specified\n", http.StatusNotFound)
 		return
 	}
 

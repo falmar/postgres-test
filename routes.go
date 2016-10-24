@@ -21,10 +21,10 @@ func wrapper(h http.Handler) httprouter.Handle {
 
 func setRoutes(r *httprouter.Router) {
 
-	r.GET("/ticket", wrapper(http.HandlerFunc(listHandler)))
-	r.POST("/ticket", wrapper(http.HandlerFunc(addHandler)))
-	r.GET("/ticket/:id", wrapper(http.HandlerFunc(getHandler)))
-	r.PUT("/ticket/:id", wrapper(http.HandlerFunc(updateHandler)))
-	// r.DELETE("/ticket/:id", wrapper(http.HandlerFunc(deleteHandler)))
+	r.GET("/tickets", wrapper(http.HandlerFunc(listHandler)))
+	r.POST("/tickets", wrapper(http.HandlerFunc(addHandler)))
+	r.GET("/tickets/:id", wrapper(http.HandlerFunc(getHandler)))
+	r.PUT("/tickets/:id", wrapper(http.HandlerFunc(updateHandler)))
+	r.DELETE("/tickets/:id", wrapper(http.HandlerFunc(deleteHandler)))
 
 }
