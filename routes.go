@@ -22,5 +22,6 @@ func wrapper(h http.Handler) httprouter.Handle {
 func setRoutes(r *httprouter.Router) {
 
 	r.GET("/ticket", wrapper(http.HandlerFunc(listHandler)))
+	r.POST("/ticket", wrapper(http.HandlerFunc(addHandler)))
 
 }

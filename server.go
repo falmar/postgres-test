@@ -8,7 +8,9 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/julienschmidt/httprouter"
 	_ "github.com/lib/pq"
 )
@@ -16,9 +18,21 @@ import (
 var postgres *sql.DB
 
 func main() {
-	var err error
 
-	postgres, err = sql.Open("postgres", "")
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	conString := `
+		host=` + os.Getenv("DB_HOST") + `
+		user=` + os.Getenv("DB_USER") + `
+		dbname=` + os.Getenv("DB_NAME") + `
+		password=` + os.Getenv("DB_PASSWORD") + `
+		sslmode=` + os.Getenv("DB_SSLMODE")
+
+	postgres, err = sql.Open("postgres", conString)
 
 	postgres.Ping()
 
